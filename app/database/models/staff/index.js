@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const Company = require('../company');
 
 const { Schema } = mongoose;
 
@@ -7,11 +8,16 @@ const options = {
     timestamps: true
 };
 
-// const loginActivitySchema = new Schema({
-//     status: String,
-//     loggingTime: Date,
-
-// }, options);
+const loginActivitySchema = new Schema({
+  status: String,
+  loggingTime: Date,
+  loginIp: { type: String, default: '' },
+  platform: {
+      type: String,
+      enum: ["Web", "Android", "Tablet"],
+      default: "Web"
+  },
+})
 
 const staffSchema = new Schema({
   firstName: { type: String, required: true },
@@ -35,8 +41,15 @@ const staffSchema = new Schema({
   isActive: { type: Boolean, default: true, select: false },
   isDelete: { type: Boolean, default: false },
   employeeId: { type: String },
+  loginActivity: [loginActivitySchema],
   role: { type: String, enum: ['admin', 'HR', 'Employee'], default: 'Employee' },
   profileImage: { type: String, default: 'default.jpg' },
+  companyId:  [
+    {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Company'
+    }
+  ],
   access: {
     type: String,
     enum: ['Full-Access', 'Partial-Access'],

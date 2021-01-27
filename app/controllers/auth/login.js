@@ -5,6 +5,8 @@ const bcrypt = require('bcryptjs');
 const Staff = require('./../../database/models/staff/index');
 const catchAsync = require('./../../utils/catchAsync');
 const AppError = require('./../../utils/appError');
+const { PasswordServ, TokenServ } = require('../../utils/auth');
+const { staffService } = require('../../services')
 
 const signToken = id => {
   return jwt.sign({id}, process.env.JWT_SECRET, {
@@ -40,18 +42,78 @@ exports.signup = catchAsync(async (req, res, next) => {
 });
 
 
+// exports.login = catchAsync(async (req, res, next) => {
+//   const { email, password } = req.body;
+
+//   if  (!email || !password) {
+//     return next(new AppError('Please provide email and password!', 400));
+//   }
+
+//   const staff = await Staff.findOne({ email }).select('+password');
+
+//   if (!staff || !(await staff.correctPassword(password, staff.password))) { 
+//     return next(new AppError('Incorrect email or password', 401));
+//   }
+//   createSendToken(staff, 200, res);
+
+// });
+
 exports.login = catchAsync(async (req, res, next) => {
+  const currentTime = Date.now();
   const { email, password } = req.body;
-
-  if  (!email || !password) {
-    return next(new AppError('Please provide email and password!', 400));
+  const { platform } = req.headers;
+  const staff = await staffService.getStaff.getStaffWithPassword({ email: email });
+  if (!staff.length) {
+    const error = new Error('Staff Not exist!');
+    error.status = 401;
+    throw error;
   }
 
-  const staff = await Staff.findOne({ email }).select('+password');
-
-  if (!staff || !(await staff.correctPassword(password, staff.password))) { 
-    return next(new AppError('Incorrect email or password', 401));
+  const isCorrectPassword = await PasswordServ.match(password, staff[0].password);
+  if (!isCorrectPassword) {
+    const error = new Error('Incorrect Password');
+      error.status = 403;
+      const log = {
+          status: 'error',
+          logingTime: currentTime,
+          platform,
+          loginIp: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+      }
+      if (staff[0].loginActivity.length >= 40) {
+        await staff[0].loginActivity.shift();
+        await staff[0].loginActivity.push(log);
+      } else {
+          staff[0].loginActivity.push(log);
+      }
+      return next(error);
   }
-  createSendToken(staff, 200, res);
-
-});
+  const log = {
+    status: 'success',
+    logingTime: currentTime,
+    platform,
+    loginIp: req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  }
+  if (staff[0].loginActivity.length >= 40) {
+      await staff[0].loginActivity.shift();
+      await staff[0].loginActivity.push(log);
+  } else {
+      staff[0].loginActivity.push(log);
+  }
+  let tokenData;
+  if(staff[0].companyId) {
+    tokenData = {
+      staffId: staff[0]._id,
+      firstName: staff[0].firstName,
+      companyId: staff[0].companyId,
+      role: staff[0].role,
+    };
+  } else {
+    tokenData = {
+      staffId: staff[0]._id,
+      firstName: staff[0].firstName,
+      role: staff[0].role,
+    };
+  }
+  const otpToken = await TokenServ.generate(tokenData);
+  res.json({ status: 200, message: 'Staff login successful', result: { token: otpToken } });
+})

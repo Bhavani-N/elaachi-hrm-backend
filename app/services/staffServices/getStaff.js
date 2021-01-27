@@ -29,3 +29,18 @@ exports.getAllStaffs =  catchAsync(async (req, res, next) => {
       }
   });
 });
+
+async function getStaffWithPassword(query) {
+  return new Promise(async(resolve, reject) => {
+    try {
+      let result = await Staff.find(query).exec();
+      resolve(result)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
+module.exports = {
+  getStaffWithPassword
+}

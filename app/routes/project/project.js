@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const { addProject, deleteProject, getProject, updateProject } = require('../../controllers/project');
+const { addProject, deleteProject, getProject, updateProject } = require('../../services/projectServices');
 
 router
     .route('/')

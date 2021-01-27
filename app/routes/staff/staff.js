@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const auth = require('../../controllers/auth/login');
-const { addStaff, deleteStaff, getStaff, updateStaff } = require('../../controllers/staff');
+const { addStaff, deleteStaff, getStaff, updateStaff } = require('../../services/staffServices');
 
 router.post('/signup', auth.signup);
 router.post('/login', auth.login);
@@ -10,11 +10,11 @@ router.post('/login', auth.login);
 router
     .route('/')
     .post(addStaff.addStaff)
-    .get(getStaff.getAllStaffs);
+    .get(getStaff.getStaffWithPassword);
 
 router
     .route('/:id')
-    .get(getStaff.getStaff)
+    // .get(getStaff.getStaff)
     .patch(updateStaff.updateStaff)
     .delete(deleteStaff.deleteStaff)
 
