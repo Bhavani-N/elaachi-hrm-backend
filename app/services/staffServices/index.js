@@ -1,10 +1,10 @@
-const addStaff = require('./addStaff');
+const createStaffService = require('./createStaff');
 const deleteStaff = require('./deleteStaff');
 const getStaff = require('./getStaff');
 const updateStaff = require('./updateStaff');
 
 module.exports = {
-    addStaff,
+    createStaffService,
     deleteStaff,
     getStaff,
     updateStaff

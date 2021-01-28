@@ -8,6 +8,10 @@ const options = {
     timestamps: true
 };
 
+const passwordResetSchema = new Schema({
+  status: { type: String, enum: ['raised', 'resolved']}
+})
+
 const loginActivitySchema = new Schema({
   status: String,
   loggingTime: Date,
@@ -42,8 +46,19 @@ const staffSchema = new Schema({
   isDelete: { type: Boolean, default: false },
   employeeId: { type: String },
   loginActivity: [loginActivitySchema],
+  passwordReset: [passwordResetSchema],
   role: { type: String, enum: ['admin', 'HR', 'Employee'], default: 'Employee' },
   profileImage: { type: String, default: 'default.jpg' },
+  contact: { type: Number },
+  languages: { type: String },
+  skills: { type: String },
+  socialMedia: [
+    {
+      typeOfMedia: { type: String },
+      link: {type: String }
+    }
+  ],
+  workstation: { type: String },
   companyId:  [
     {
         type: mongoose.Schema.ObjectId,
@@ -62,12 +77,6 @@ staffSchema.pre('save', async function(next) {
   next();
 });
 
-staffSchema.methods.correctPassword = async function(
-  candidatePassword,
-  userPassword
-) {
-  return await bcrypt.compare(candidatePassword, userPassword);
-};
 
 const Staff = mongoose.model('Staff', staffSchema);
 module.exports = Staff;

@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const auth = require('../../controllers/auth/login');
-const { addStaff, deleteStaff, getStaff, updateStaff } = require('../../services/staffServices');
-
-router.post('/signup', auth.signup);
-router.post('/login', auth.login);
+const { createStaffService,
+    deleteStaff,
+    getStaff,
+    updateStaff } = require('../../services/staffServices');
 
 router
     .route('/')
-    .post(addStaff.addStaff)
+    .post(createStaffService.createStaffService)
     .get(getStaff.getStaffWithPassword);
 
 router
