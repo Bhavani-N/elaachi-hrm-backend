@@ -41,23 +41,6 @@ exports.signup = catchAsync(async (req, res, next) => {
   createSendToken(newStaff, 201, res);
 });
 
-
-// exports.login = catchAsync(async (req, res, next) => {
-//   const { email, password } = req.body;
-
-//   if  (!email || !password) {
-//     return next(new AppError('Please provide email and password!', 400));
-//   }
-
-//   const staff = await Staff.findOne({ email }).select('+password');
-
-//   if (!staff || !(await staff.correctPassword(password, staff.password))) { 
-//     return next(new AppError('Incorrect email or password', 401));
-//   }
-//   createSendToken(staff, 200, res);
-
-// });
-
 exports.login = catchAsync(async (req, res, next) => {
   const currentTime = Date.now();
   const { email, password } = req.body;
