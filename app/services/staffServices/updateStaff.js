@@ -1,19 +1,16 @@
-const Staff = require('../../database/models/staff/index');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
+const { staff } = require('../../database')
 
-exports.updateStaff = catchAsync(async (req, res, next) => {
-  const result = await Staff.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
-  if (!result) {
-    return next(new AppError('No document found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: result
-    }
-  });
-});
+async function updateStaff(id, data) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let result = await staff.Staff.findOneAndUpdate(id, data, { new: true }).populate('companyId').exec();
+            resolve(result)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+module.exports = {
+    updateStaff
+}

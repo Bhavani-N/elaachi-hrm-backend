@@ -1,39 +1,20 @@
-const Staff = require('../../database/models/staff/index');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
+const Staff = require('../../database');
 
-// exports.getStaff = catchAsync(async(req, res, next) => {
-//   let result = await Staff.findById(req.params.id); 
-
-//   if(!result) {
-//     return next(new AppError('No document found with that ID', 404));
-//   }
-
-//   res.status(200).json({
-//     status: 'success',
-//     data: {
-//       data: result
-//     }
-//   });
-// });
-
-// exports.getAllStaffs =  catchAsync(async (req, res, next) => {
-//   const staffs = await Staff.find();
-
-//   // SEND RESPONSE
-//   res.status(200).json({
-//       status: 'success',
-//       results: staffs.length,
-//       data: {
-//           staffs
-//       }
-//   });
-// });
+async function getStaff(query) {
+  return new Promise(async(resolve, reject) => {
+      try {
+          let result = await staff.Staff.find(query).populate('companyId').exec();
+          resolve(result)
+      } catch (error) {
+          reject(error)
+      }
+  })
+}
 
 async function getStaffWithPassword(query) {
   return new Promise(async(resolve, reject) => {
     try {
-      let result = await Staff.find(query).exec();
+      let result = await Staff.Staff.find(query).populate('companyId').exec();
       resolve(result)
     } catch (error) {
       reject(error)
@@ -42,5 +23,6 @@ async function getStaffWithPassword(query) {
 }
 
 module.exports = {
+  getStaff,
   getStaffWithPassword
 }
