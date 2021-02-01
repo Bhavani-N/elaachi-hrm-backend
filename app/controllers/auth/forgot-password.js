@@ -1,7 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const { staffService } = require('../../services');
 const { SendPasswordResetMail } = require('../../utils/mail');
-const TokenServ = require('../../utils/auth');
+const { TokenServ } = require('../../utils/auth');
 
 async function forgot_Password(req, res, next) {
     try {

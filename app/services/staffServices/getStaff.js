@@ -1,9 +1,9 @@
 const Staff = require('../../database');
 
-async function getStaff(query) {
+async function getStaff() {
   return new Promise(async(resolve, reject) => {
       try {
-          let result = await  Staff.Staff.find(query).populate('companyId').exec();
+          let result = await  Staff.Staff.find().populate('companyId').exec();
           resolve(result)
       } catch (error) {
           reject(error)

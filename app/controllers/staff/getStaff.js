@@ -2,10 +2,14 @@ const { staffService } = require('../../services')
 
 async function getStaff(req, res, next) {
     try {
-        const company = req.tokenData.companyId;
-        const result = await staffService.getStaff({isDeactived: false},{companyId:company});
-        // const result = await staffService.getStaff({isDeactived: false});
-        res.json({ status: 200, message: 'get staff details successfully', result: result })
+        // const company = req.tokenData.companyId;
+        // const result = await staffService.getStaff({isDeactived: false},{companyId: req.tokenData.companyId});
+        const result = await staffService.getStaff({isDeactived: false});
+        if(result) {
+            res.json({ status: 200, message: 'get staff details successfully', result: result })
+        } else {
+            res.status(404).json({ status: 404, message: 'No Data Found' });
+        }
     } catch (error) {
         next(error)
     }

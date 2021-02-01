@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const { addProject, deleteProject, getProject, updateProject } = require('../../services/projectServices');
+const { createProject, deleteProject, getProject, updateProject } = require('../../services/projectServices');
 
 router
     .route('/')
-    .post(addProject.addProject)
+    .post(createProject.createProject)
     .get(getProject.getAllProjects);
 
 router
     .route('/:id')
-    .get(getProject.getProject)
+    .get(getProject.getProjectById)
     .patch(updateProject.updateProject)
-    .delete(deleteProject.deleteProject)
+    .delete(deleteProject.deleteById)
 
 module.exports = router;

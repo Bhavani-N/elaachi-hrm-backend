@@ -66,8 +66,8 @@ app.use(globalErrorHandler);
 //     .catch((error) => console.log(error.message));
 
 const onServerStart = () => {
-    const ENVIROINMENT = process.env.NODE_ENV || 'development';
-    const message = `Server Listening On Port, ${PORT}, ENVIROINMENT=${ENVIROINMENT}`;
+    const ENVIRONMENT = process.env.NODE_ENV || 'development';
+    const message = `Server Listening On Port, ${PORT}, ENVIRONMENT=${ENVIRONMENT}`;
     // connectionDb();
     console.log(message);
 };

@@ -1,19 +1,16 @@
-const Project = require('../../database/models/project');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
+const { Project } = require('../../database');
 
-exports.updateProject = catchAsync(async (req, res, next) => {
-  const result = await Project.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
-  if (!result) {
-    return next(new AppError('No document found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: result
-    }
-  });
-});
+async function updateProject(id, data) {
+  return new Promise(async(resolve, reject) => {
+      try {
+          let result = await Project.Project.findOneAndUpdate({_id: id}, data, { new: true }).exec();
+          resolve(result)
+      } catch (error) {
+          reject(error)
+      }
+  })
+}
+
+module.exports = {
+  updateProject
+}

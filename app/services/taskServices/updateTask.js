@@ -1,19 +1,16 @@
-const Task = require('../../database/models/task/index');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
+const { Task } = require('../../database');
 
-exports.updateTask = catchAsync(async (req, res, next) => {
-  const result = await Task.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true
-  });
-  if (!result) {
-    return next(new AppError('No document found with that ID', 404));
-  }
-  res.status(200).json({
-    status: 'success',
-    data: {
-      data: result
-    }
-  });
-});
+async function updateTask(id, data) {
+  return new Promise(async(resolve, reject) => {
+      try {
+          let result = await Task.Task.findOneAndUpdate({_id: id}, data, { new: true }).exec();
+          resolve(result)
+      } catch (error) {
+          reject(error)
+      }
+  })
+}
+
+module.exports = {
+  updateTask
+}

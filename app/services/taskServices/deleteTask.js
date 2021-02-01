@@ -1,18 +1,28 @@
-const Task = require('../../database/models/task/index');
-const catchAsync = require('../../utils/catchAsync');
-const AppError = require('../../utils/appError');
+const { Task } = require('../../database');
 
-exports.deleteTask = catchAsync(async(req, res, next) => {
+async function deleteById(id) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await Task.Task.findOneAndRemove({_id: id});
+            resolve(result);
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
-    const result = await Task.findByIdAndDelete(req.params.id);
+async function deleteByQuery(query) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            const result = await Task.Task.findOneAndRemove(query);
+            resolve(result);
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
-    if(!result) {
-        return next(new AppError('No document found with that ID', 404));
-    }
-    res.status(204).json({
-        status: 'success',
-        data: null
-    });
-});
-
-
+module.exports = {
+    deleteById,
+    deleteByQuery
+}
