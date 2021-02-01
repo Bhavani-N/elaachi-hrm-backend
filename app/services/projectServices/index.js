@@ -1,8 +1,12 @@
-const createProject = require('./createProject');
-const deleteProject = require('./deleteProject');
-const getProject = require('./getProject');
-const updateProject = require('./updateProject');
+const { createProject } = require('./createProject');
+const { deleteById, deleteByQuery } = require('./deleteProject');
+const { getProjectById,
+getProjectByQuery,
+getAllProjects } = require('./getProject');
+const { updateProject } = require('./updateProject');
 
 module.exports = {
-    createProject, deleteProject, getProject, updateProject
+    createProject, deleteById, deleteByQuery, getProjectById,
+    getProjectByQuery,
+    getAllProjects ,updateProject
 }

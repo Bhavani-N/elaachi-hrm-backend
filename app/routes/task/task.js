@@ -14,7 +14,7 @@ router
 router
     .route('/:id')
     .get(getTask.getTaskById)
-    .patch(updateTask.updateTask)
+    .put(updateTask.updateTask)
     .delete(deleteTask.deleteById)
 
 

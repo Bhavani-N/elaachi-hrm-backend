@@ -3,7 +3,18 @@ const { Project } = require('../../database');
 async function getProjectById(id) {
   return new Promise(async(resolve, reject)=> {
       try {
-          let data = await Project.Project.findById(id).exec();
+          let data = await Project.findById(id).exec();
+          resolve(data)
+      } catch (error) {
+          reject(error)
+      }
+  })
+}
+
+async function getProjectByQuery(query) {
+  return new Promise(async(resolve, reject) => {
+      try {
+          let data = await Project.findOne(query).exec();
           resolve(data)
       } catch (error) {
           reject(error)
@@ -14,7 +25,7 @@ async function getProjectById(id) {
 async function getAllProjects() {
   return new Promise(async(resolve, reject) => {
       try {
-          let data = await Project.Project.find();
+          let data = await Project.find();
           resolve(data)
       } catch (error) {
           reject(error)
@@ -24,5 +35,6 @@ async function getAllProjects() {
 
 module.exports = {
   getProjectById,
+  getProjectByQuery,
   getAllProjects
 }

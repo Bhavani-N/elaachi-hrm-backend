@@ -17,7 +17,7 @@ router
 router
     .route('/:id')
     .get(getStaff.getStaffById)
-    .patch(updateStaff.updateStaff)
+    .put(updateStaff.updateStaff)
     .delete(deleteStaff.deleteStaff)
 
 module.exports = router;
