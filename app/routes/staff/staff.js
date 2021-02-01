@@ -1,23 +1,23 @@
 const express = require('express');
 const router = express.Router();
 
-const { createStaffService,
-    deleteStaff,
+const {
+    createStaff,
     getStaff,
-    updateStaff } = require('../../services/staffServices');
+    updateStaff,
+    deleteStaff
+} = require('../../controllers/staff');
 
 router
     .route('/')
-    .post(createStaffService.createStaffService)
-    .get(getStaff.getStaffWithPassword);
+    .post(createStaff.createStaff)
+    .get(getStaff.getStaff)
+    .put(updateStaff.updateStaffDetails)
 
 router
     .route('/:id')
-    // .get(getStaff.getStaff)
+    .get(getStaff.getStaffById)
     .patch(updateStaff.updateStaff)
     .delete(deleteStaff.deleteStaff)
-
-// router.patch('/updateStaff', updateStaff.updateStaff);
-// router.delete('/deleteStaff', deleteStaff.deleteStaff);
 
 module.exports = router;

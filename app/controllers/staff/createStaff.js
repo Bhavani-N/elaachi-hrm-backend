@@ -18,8 +18,13 @@ async function createStaff(req, res, next) {
             username: result.firstName,
             companyId: result.companyId,
         };
-        res.json({ status: 200, message: 'staff created successfully', result: result });
+        const otpToken = await TokenServ.generate(tokenData);
+        res.json({ status: 200, message: 'staff created successfully', result: result, otpToken});
     } catch (error) {
         next(error)
     }
+}
+
+module.exports = {
+    createStaff
 }

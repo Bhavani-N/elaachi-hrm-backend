@@ -24,7 +24,7 @@ const loginActivitySchema = new Schema({
 })
 
 const staffSchema = new Schema({
-  firstName: { type: String, required: true },
+  firstName: { type: String },
   lastName: { type: String },
   phoneNumber: {
     countryCode: { type: Number },

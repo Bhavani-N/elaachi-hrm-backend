@@ -11,6 +11,16 @@ const config = {
     // NODE ENV VARIABLES
   
     PORT: process.env.NODE_PORT,
+
+    // Ip
+    IP: '0.0.0.0',
+
+    // Redirection Host Addresses
+
+    HOST_ADDR: {
+        ui: 'http://localhost:4200',
+        server: 'http://localhost:8080'
+    }
   
   };
   

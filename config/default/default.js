@@ -9,6 +9,13 @@ const config = {
     },
     PORT: process.env.PORT || 3000,
   
+    IP: '0.0.0.0',
+
+    // Redirection Host Addresses
+    HOST_ADDR: {
+        ui: 'http://localhost:4200',
+        server: 'http://localhost:3000'
+    },
   };
   
   module.exports = config;
