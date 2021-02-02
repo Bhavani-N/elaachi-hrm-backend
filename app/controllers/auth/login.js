@@ -45,7 +45,7 @@ exports.login = catchAsync(async (req, res, next) => {
   const currentTime = Date.now();
   const { email, password } = req.body;
   const { platform } = req.headers;
-  const staff = await staffService.getStaff.getStaffWithPassword({ email: email });
+  const staff = await staffService.getStaffWithPassword({ email: email });
   if (!staff.length) {
     const error = new Error('Staff Not exist!');
     error.status = 401;
