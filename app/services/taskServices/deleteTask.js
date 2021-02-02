@@ -3,7 +3,7 @@ const { Task } = require('../../database');
 async function deleteById(id) {
     return new Promise(async (resolve, reject) => {
         try {
-            const result = await Task.Task.findOneAndRemove({_id: id});
+            const result = await Task.findOneAndRemove({_id: id});
             resolve(result);
         } catch (error) {
             reject(error)
@@ -14,7 +14,7 @@ async function deleteById(id) {
 async function deleteByQuery(query) {
     return new Promise(async (resolve, reject) => {
         try {
-            const result = await Task.Task.findOneAndRemove(query);
+            const result = await Task.findOneAndRemove(query);
             resolve(result);
         } catch (error) {
             reject(error)

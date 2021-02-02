@@ -9,4 +9,4 @@ module.exports = {
     createProject, deleteById, deleteByQuery, getProjectById,
     getProjectByQuery,
     getAllProjects ,updateProject
-}
+} 

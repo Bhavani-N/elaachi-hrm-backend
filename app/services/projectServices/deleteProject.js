@@ -19,7 +19,7 @@ async function deleteByQuery(query) {
         } catch (error) {
             reject(error)
         }
-    })
+    }) 
 }
 
 module.exports = {

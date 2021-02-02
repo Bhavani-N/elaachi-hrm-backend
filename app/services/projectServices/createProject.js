@@ -12,6 +12,6 @@ async function createProject(data) {
     })
 }
 
-module.exports = {
+module.exports = { 
     createProject
 }

@@ -27,7 +27,7 @@ async function getAllProjects() {
       try {
           let data = await Project.find();
           resolve(data)
-      } catch (error) {
+      } catch (error) { 
           reject(error)
       }
   })
