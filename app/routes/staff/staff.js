@@ -8,16 +8,18 @@ const {
     deleteStaff
 } = require('../../controllers/staff');
 
+const { AuthServ } = require("../../utils/auth");
+
 router
     .route('/')
     .post(createStaff.createStaff)
-    .get(getStaff.getStaff)
-    .put(updateStaff.updateStaffDetails)
+    .get(AuthServ.authorize(), getStaff.getStaff)
+    .put(AuthServ.authorize(), updateStaff.updateStaffDetails)
 
 router
     .route('/:id')
-    .get(getStaff.getStaffById)
-    .put(updateStaff.updateStaff)
-    .delete(deleteStaff.deleteStaff)
+    .get(AuthServ.authorize(), getStaff.getStaffById)
+    .put(AuthServ.authorize(), updateStaff.updateStaff)
+    .delete(AuthServ.authorize(), deleteStaff.deleteStaff)
 
 module.exports = router;

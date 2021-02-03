@@ -17,34 +17,60 @@ function hasPermission(requiredRole, actualRole) {
     return (actualRoleWeight >= requiredRoleWeight); 
 }
 
-function authorize(role = roles.guest) {
-    return async (req, res, next) => {
+function authorize(role = roles.Employee) {
+    return async(req, res, next) => {
         const requiredRole = role;
+        const token = (req.headers.authorization || req.headers.Authorization || '').split('Bearer ').pop();
+        /*
+         * If Token Not Exist Unauthorized Error;
+         */
+        if (!token) {
+            const error = new Error('Token Not Exist');
+            error.status = 407;
+            return next(error);
+        }
         try {
-            if (!req.headers.authorization || !req.headers.Authorization) {
-                const token = (req.headers.authorization || req.headers.Authorization || '').split('Bearer ').pop();
-                if (!token) {
-                  const error = new Error('Token Not Exist');
-                  error.status = 407;
-                  return next(error);
-                }
-                const decodedData = await TokenServ.verify(token);
-                req.tokenData = decodedData;
-                const actualRole = decodedData.roleName;
-                if (!hasPermission(requiredRole, actualRole)) {
-                  const error = new Error('You don\'t have permission to Proceed!');
-                  error.status = 401;
-                  return next(error);
-                }
-            } else {
+            const decodedData = await TokenServ.verify(token);
+            req.tokenData = decodedData;
+            const actualRole = decodedData.role;
+            if (!hasPermission(requiredRole, actualRole)) {
                 const error = new Error('You don\'t have permission to Proceed!');
                 error.status = 401;
                 return next(error);
             }
             next();
-        }catch (error) {
+        } catch (error) {
             next(error);
         }
-        return ' ';
     };
 }
+
+function checkAuthorize() {
+    return async (req, res, next) => {
+        const token = (req.headers.authorization || req.headers.Authorization || '').split('Bearer ').pop();
+        /*
+         * If Token Not Exist Unauthorized Error;
+         */
+        if (!token) {
+            const error = new Error('Token Not Exist');
+            error.status = 401;
+            return next(error);
+        }
+        try {
+            const decodedData = await TokenServ.verify(token);
+            req.tokenData = decodedData;
+            next();
+        } catch (error) {
+            next(error);
+        }
+    };
+}
+
+module.exports = {
+    authorize,
+    hasPermission,
+    checkAuthorize,
+    roles
+};
+
+
