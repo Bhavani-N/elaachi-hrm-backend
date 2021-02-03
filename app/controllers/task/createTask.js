@@ -3,13 +3,11 @@ const { getTaskByQuery } = require('../../services/taskServices/getTask');
 
 async function createTasks(req, res, next) {
     try {
-        let taskObj = req.body;
-        let query = {
-            name: taskObj.taskName
-        }
-        const findTask = await getTaskByQuery(query);
+        const findTask = await getTaskByQuery({
+            taskName: req.body.taskName
+        });
         if (!findTask) {
-            const result = await createTask(taskObj);
+            const result = await createTask(req.body);
             res.json({ status: 200, message: 'Task created successfully', result: result })
         } else {
             res.json({ status: 200, message: 'Task Name exist' })

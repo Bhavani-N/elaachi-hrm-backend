@@ -3,7 +3,7 @@ const TokenServ = require('./token');
 const roles = {
     admin: 'administrator',
     HR: 'hr',
-    Employee: 'employee',
+    Employee: 'Employee',
 };
 
 function hasPermission(requiredRole, actualRole) {
@@ -33,6 +33,7 @@ function authorize(role = roles.Employee) {
             const decodedData = await TokenServ.verify(token);
             req.tokenData = decodedData;
             const actualRole = decodedData.role;
+            console.log(requiredRole, actualRole)
             if (!hasPermission(requiredRole, actualRole)) {
                 const error = new Error('You don\'t have permission to Proceed!');
                 error.status = 401;

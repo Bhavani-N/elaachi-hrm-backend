@@ -3,13 +3,11 @@ const { getProjectByQuery } = require('../../services/projectServices/getProject
 
 async function createProjects(req, res, next) {
     try {
-        let projectObj = req.body;
-        let query = {
-            name: projectObj.projectName
-        }
-        const findProject = await getProjectByQuery(query);
+        const findProject = await getProjectByQuery({
+            projectName: req.body.projectName
+        });
         if (!findProject) {
-            const result = await createProject(projectObj);
+            const result = await createProject(req.body);
             res.json({ status: 200, message: 'Project created successfully', result: result })
         } else {
             res.json({ status: 200, message: 'Project Name exist' })

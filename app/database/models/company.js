@@ -23,7 +23,7 @@ const companySchema = new Schema({
         ],
         emails: [{
             email: { type: String },
-            typeOf: { type: String }
+            typeOfEmail: { type: String }
         }]
     },
     officeHours: {

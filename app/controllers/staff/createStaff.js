@@ -20,6 +20,7 @@ async function createStaff(req, res, next) {
         const tokenData = {
             username: result.firstName,
             companyId: result.companyId,
+            role: result.role,
             otp: result.otp
         };
         const otpToken = await TokenServ.generate(tokenData);

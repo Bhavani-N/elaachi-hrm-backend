@@ -26,8 +26,11 @@ const taskSchema = new Schema({
             ref: 'Project'
         }
     ],
-    duration: {
-        type: Number
+    TaskTiming: {
+        duration: [{
+            dates: { type: Date },
+            TimeTaken: { type: Number }
+        }]
     },
     BillableHrs: {
         type: Number
