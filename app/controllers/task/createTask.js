@@ -7,11 +7,12 @@ async function createTasks(req, res, next) {
         const findTask = await getTaskByQuery({
             taskName: req.body.taskName
         });
+        const data = req.body.project;
         if (!findTask) {
             const result = await createTask(req.body);
             const prjType = await updateTask({ _id: req.body.project }, 
                 {
-                    $push: { Project: result._id }
+                    $push: { projectName: data }
                 })
             res.json({ status: 200, message: 'Task created successfully', result: result })
         } else {
