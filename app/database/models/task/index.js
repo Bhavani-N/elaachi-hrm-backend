@@ -20,12 +20,10 @@ const taskSchema = new Schema({
         enum: ['pending', 'completed'],
         default: 'pending'
     },
-    project: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Project'
-        }
-    ],
+    project: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Project'
+    },
     TaskTiming: {
         duration: [{
             dates: { type: Date },
@@ -36,9 +34,9 @@ const taskSchema = new Schema({
         type: Number
     }
 },
-{
-    timestamps: true,
-});
+    {
+        timestamps: true,
+    });
 
 const Task = mongoose.model('Task', taskSchema);
 module.exports = Task;
