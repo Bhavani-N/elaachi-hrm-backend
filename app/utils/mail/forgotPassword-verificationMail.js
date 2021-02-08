@@ -1,4 +1,3 @@
-'use strict';
 const { SendMail } = require('../../lib');
 const { URLSearchParams, URL } = require('url');
 const config = require('../../../config/production/production');

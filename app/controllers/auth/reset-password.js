@@ -25,7 +25,7 @@ async function reset_password(req, res, next) {
         }
         staff[0].password = await PasswordServ.hash(password);
         staff[0].isEmailVerified = await true;
-        staff[0].passwordRest.push({ status: 'resolved' });
+        staff[0].passwordReset.push({ status: 'resolved' });
         staff[0].otp = await undefined;
         let result = await staffService.createStaffService(staff[0])
         res.json({ status: 200, message: 'Password Updated Successfully.. ', result: result })
