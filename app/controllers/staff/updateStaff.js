@@ -37,9 +37,12 @@ async function updateStaff(req, res, next) {
 async function updateStaffDetails(req, res, next) {
     let data = req.body;
     let id = req.query.id;
+    console.log(id);
     let company = req.tokenData.companyId;
+    console.log(company);
     try {
         const result = await staffService.updateStaff({ _id:id, companyId: company }, data);
+        console.log(result)
         res.json({ status: 200, message: 'staff updated successfully', result: result })
     } catch (error){
         next(error)
