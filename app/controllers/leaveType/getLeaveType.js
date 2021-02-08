@@ -1,4 +1,4 @@
-const { leaveTypeService } = require('../../services')
+const { getLeaveTypeById, getLeaveTypeByQuery, getAllLeaveTypes } = require('../../services/LeaveTypeServices/getLeaveType');
 
 async function getAllLeaveType(req, res, next) {
     try {
@@ -8,7 +8,7 @@ async function getAllLeaveType(req, res, next) {
         // filters.pageNum = {};
         // filters.pageSize = {};
 
-        const result = await leaveTypeService.getAllLeaveType();
+        const result = await getAllLeaveTypes();
         res.json({ status: 200, message: 'Leave Type details', result: result })
     } catch (error) {
         next(error);
@@ -17,7 +17,7 @@ async function getAllLeaveType(req, res, next) {
 
 async function getLeaveTypesByID(req, res, next) {
     try {
-        const result = await leaveTypeService.getLeaveTypesByID(req.params.id);
+        const result = await getLeaveTypeById(req.params.id);
         res.json({ status: 200, message: 'Leave Type Details fetched', result: result })
     } catch (error) {
         next(error);
