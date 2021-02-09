@@ -24,13 +24,11 @@ const taskSchema = new Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Project'
     },
-    TaskTiming: {
-        duration: [{
-            dates: { type: Date },
-            TimeTaken: { type: Number }
-        }]
-    },
-    BillableHrs: {
+    duration: [{
+        dates: { type: Date },
+        TimeTaken: { type: Number }
+    }],
+    billableHours: {
         type: Number
     }
 },

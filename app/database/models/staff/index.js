@@ -69,7 +69,7 @@ const staffSchema = new Schema({
     type: String,
     enum: ['Full-Access', 'Partial-Access'],
   },
-}, options);
+}, options);         
 
 staffSchema.pre('save', async function(next) {
   if (!this.isModified('password')) return next();
