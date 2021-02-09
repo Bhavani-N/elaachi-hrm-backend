@@ -1,4 +1,5 @@
-const { taskService } = require('../../services')
+const { taskService } = require('../../services');
+const { Task } = require('../../database');
 
 async function getAllTask(req, res, next) {
     try {
@@ -25,7 +26,41 @@ async function getTasksByID(req, res, next) {
     }
 }
 
+async function getWeeklyPlan(req, res, next) {
+    try {
+        const year = req.params.year * 1;
+        const plan = await Task.aggregate([
+            {
+            $unwind: '$startDates'
+            },
+            {  
+            $match: {
+                startDates: {
+                $gte: new Date(`${year}-02-01`),
+                $lte: new Date(`${year}-02-07`)
+                }
+            }
+            },
+            {
+            $group: {
+                _id: { $month: '$startDates' },
+                numTaskStarts: { $sum: 1 },
+                tasks: { $push: '$taskName' }
+            }
+            },
+            {
+            $limit: 07
+            }
+        ])
+    }catch (error) {
+        next(error);
+    }
+}
+
+
+
 module.exports = {
     getAllTask,
-    getTasksByID
+    getTasksByID,
+    getWeeklyPlan
 }

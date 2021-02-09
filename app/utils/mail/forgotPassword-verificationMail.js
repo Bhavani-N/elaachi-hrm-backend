@@ -10,7 +10,7 @@ async function send(otpToken, email) {
         otp
     });
     const host = HOST_ADDR.ui;
-    const url = new URL(`${host}/auth/newpassword`);
+    const url = new URL(`${host}/resetpassword`);
     url.search = params.toString();
     ejs.renderFile(__dirname + "/emailTemplates/forgotTemplate.ejs", { url: url.href }, function (err, data) {
         if (err) {

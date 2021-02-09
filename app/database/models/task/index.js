@@ -15,6 +15,7 @@ const taskSchema = new Schema({
         unique: true,
         trim: true
     },
+    startDates: [Date],
     status: {
         type: String,
         enum: ['pending', 'completed'],
