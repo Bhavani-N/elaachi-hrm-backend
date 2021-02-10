@@ -1,6 +1,6 @@
 const { userLeave } = require('../../database');
 
-async function getuserLeaveById(id) {
+async function getUserLeaveById(id) {
     return new Promise(async(resolve, reject)=> {
         try {
             let data = await userLeave.findById(id).exec();
@@ -11,7 +11,7 @@ async function getuserLeaveById(id) {
     })
 }
 
-async function getuserLeaveByQuery(query) {
+async function getUserLeaveByQuery(query) {
     return new Promise(async(resolve, reject) => {
         try {
             let data = await userLeave.findOne(query).exec();
@@ -22,7 +22,7 @@ async function getuserLeaveByQuery(query) {
     })
 }
 
-async function getAlluserLeaves() {
+async function getAllUserLeaves() {
     return new Promise(async(resolve, reject) => {
         try {
             let data = await userLeave.find();
@@ -34,8 +34,8 @@ async function getAlluserLeaves() {
 }
 
 module.exports = {
-    getuserLeaveById,
-    getuserLeaveByQuery,
-    getAlluserLeaves
+    getUserLeaveById,
+    getUserLeaveByQuery,
+    getAllUserLeaves
 }
 
