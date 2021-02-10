@@ -1,4 +1,4 @@
-const { deleteById } = require('../../services/LeaveTypeServices');
+const { deleteById } = require('../../services/LeaveTypeServices/deleteLeaveType');
 
 async function deleteLeaveTypes(req, res, next) {
     try {

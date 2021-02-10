@@ -12,10 +12,6 @@ router
     .get(getTask.getAllTask);
 
 router
-    .route('/weekly-plan/:year')
-    .get(getTask.getWeeklyPlan);
-
-router
     .route('/:id')
     .get(getTask.getTasksByID)
     .put(updateTask.updateTasks)

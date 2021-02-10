@@ -24,12 +24,14 @@ async function getTaskByQuery(query) {
 
 async function getAllTasks() {
   return new Promise(async(resolve, reject) => {
-      try {
-          let data = await Task.find().populate('project').exec();
-          resolve(data)
-      } catch (error) {
-          reject(error)
-      }
+        try {
+            let data = await Task.find({
+                billableHours: 16
+            }).populate('project').exec();
+            resolve(data)
+        } catch (error) {
+            reject(error)
+        }
   })
 }
 

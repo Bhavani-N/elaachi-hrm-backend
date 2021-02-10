@@ -1,4 +1,4 @@
-const { deleteById } = require('../../services/projectServices');
+const { deleteById } = require('../../services/projectServices/deleteProject');
 
 async function deleteProjects(req, res, next) {
     try {

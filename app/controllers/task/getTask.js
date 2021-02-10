@@ -10,7 +10,7 @@ async function getAllTask(req, res, next) {
         // filters.pageSize = {};
 
         const result = await taskService.getAllTasks();
-        res.json({ status: 200, message: 'Task details', result: result })
+        res.json({ status: 200, message: 'Task details', results: result.length, data: result })
     } catch (error) {
         next(error);
     }
@@ -26,41 +26,7 @@ async function getTasksByID(req, res, next) {
     }
 }
 
-async function getWeeklyPlan(req, res, next) {
-    try {
-        const year = req.params.year * 1;
-        const plan = await Task.aggregate([
-            {
-            $unwind: '$startDates'
-            },
-            {  
-            $match: {
-                startDates: {
-                $gte: new Date(`${year}-02-01`),
-                $lte: new Date(`${year}-02-07`)
-                }
-            }
-            },
-            {
-            $group: {
-                _id: { $month: '$startDates' },
-                numTaskStarts: { $sum: 1 },
-                tasks: { $push: '$taskName' }
-            }
-            },
-            {
-            $limit: 07
-            }
-        ])
-    }catch (error) {
-        next(error);
-    }
-}
-
-
-
 module.exports = {
     getAllTask,
-    getTasksByID,
-    getWeeklyPlan
+    getTasksByID
 }
