@@ -11,6 +11,8 @@ router
     .post(createTask.createTasks)
     .get(getTask.getAllTask);
 
+router.route('/list/:project').get(getTask.getAllTasksByProject);
+
 router
     .route('/:id')
     .get(getTask.getTasksByID)

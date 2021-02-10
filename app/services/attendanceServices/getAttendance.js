@@ -1,9 +1,9 @@
-const { Company } = require('../../database');
+const { Attendance } = require('../../database');
 
-async function getCompanyById(id) {
+async function getAttendanceById(id) {
     return new Promise(async(resolve, reject)=> {
         try {
-            let data = await Company.findById(id).exec();
+            let data = await Attendance.findById(id).exec();
             resolve(data)
         } catch (error) {
             reject(error)
@@ -11,10 +11,10 @@ async function getCompanyById(id) {
     })
 }
 
-async function getCompanyByQuery(query) {
+async function getAttendanceByQuery(query) {
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await Company.findOne(query).exec();
+            let data = await Attendance.findOne(query).exec();
             resolve(data)
         } catch (error) {
             reject(error)
@@ -22,10 +22,10 @@ async function getCompanyByQuery(query) {
     })
 }
 
-async function getAllCompanies() {
+async function getAllAttendance() {
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await Company.find();
+            let data = await Attendance.find();
             resolve(data)
         } catch (error) {
             reject(error)
@@ -35,8 +35,8 @@ async function getAllCompanies() {
 
 
 module.exports = {
-    getCompanyById,
-    getCompanyByQuery,
-    getAllCompanies
+    getAttendanceById,
+    getAttendanceByQuery,
+    getAllAttendance
 }
 
