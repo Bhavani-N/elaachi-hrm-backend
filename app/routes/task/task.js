@@ -6,18 +6,20 @@ const { createTask,
     updateTask,
     deleteTask } = require('../../controllers/task');
 
+const { AuthServ } = require("../../utils/auth");
+
 router
     .route('/')
-    .post(createTask.createTasks)
-    .get(getTask.getAllTask);
+    .post(AuthServ.authorize(), createTask.createTasks)
+    .get(AuthServ.authorize(), getTask.getAllTask);
 
-router.route('/list/:project').get(getTask.getAllTasksByProject);
+router.route('/list').get(AuthServ.authorize(), getTask.getTaskByStartDates);
 
 router
     .route('/:id')
-    .get(getTask.getTasksByID)
-    .put(updateTask.updateTasks)
-    .delete(deleteTask.deleteTasks)
+    .get(AuthServ.authorize(), getTask.getTasksByID)
+    .put(AuthServ.authorize(), updateTask.updateTasks)
+    .delete(AuthServ.authorize(), deleteTask.deleteTasks)
 
 
 module.exports = router;

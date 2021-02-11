@@ -6,15 +6,17 @@ const { createLeaveType,
     updateLeaveType,
     deleteLeaveType  } = require('../../controllers/leaveType');
 
+const { AuthServ } = require("../../utils/auth");
+
 router
     .route('/')
-    .post(createLeaveType.createLeaveTypes)
-    .get(getLeaveType.getAllLeaveType);
+    .post(AuthServ.authorize(), createLeaveType.createLeaveTypes)
+    .get(AuthServ.authorize(), getLeaveType.getAllLeaveType);
 
 router
     .route('/:id')
-    .get(getLeaveType.getLeaveTypesByID)
-    .put(updateLeaveType.updateLeaveTypes)
-    .delete(deleteLeaveType.deleteLeaveTypes)
+    .get(AuthServ.authorize(), getLeaveType.getLeaveTypesByID)
+    .put(AuthServ.authorize(), updateLeaveType.updateLeaveTypes)
+    .delete(AuthServ.authorize(), deleteLeaveType.deleteLeaveTypes)
 
 module.exports = router;

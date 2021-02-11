@@ -9,7 +9,7 @@ async function getAllTask(req, res, next) {
         res.json({ status: 200, message: 'Task details', results: result.length, data: result })
     } catch (error) {
         next(error);
-    }
+    } 
 }
 
 async function getTasksByID(req, res, next) {
@@ -22,32 +22,27 @@ async function getTasksByID(req, res, next) {
     }
 }
 
-
-
-async function getAllTasksByProject(req, res, next) {
+async function getTaskByStartDates(req, res, next) {
     try {
-        let project = req.params.project;
-        let filters = {};
-        filters.query = {
-            project: project
-        };
-        filters.pageNum = req.body.pageNum;
-        filters.pageSize = req.body.pageSize;
-        const result = await taskService.getAllTasks(filters);
-        const projectResult = await projectService.getProjectById(project);
-        if(result.length > 0) {
-            res.json({ 
-                status: 200, message: 'List of Tasks', result: {
-                    tasksData: result
-                }
-            })
-        } else {
-            res.json({ 
-                status: 200, message: 'No project added to this task', result: {
-                    tasksData: []
-                }
-            })
-        }
+        let taskObj = req.body;
+        const result = await taskService.getAllTasks();
+        let startDate = new Date("2021-02-01");
+        let endDate = new Date("2021-02-10");
+        console.log('!!!!!!',db.tasks.find({$and:[{startDate:{$lte:new Date()}},{endDate:{$gte:new Date()}}]}));
+
+        // console.log('...!!!', Object.values(result))
+        let resultTaskData = Object.values(result).filter(function (a) {
+            let hitDates = a.startDates || {}; // extract all dates
+            // hitDates = Object.keys(hitDates);
+            console.log('>>>>>>>',hitDates)
+            hitDateMatchExists = hitDates.some(function (dateStr) {
+                let date = new Date(dateStr);
+                return date >= startDate && date <= endDate
+            });
+            return hitDateMatchExists;
+        });
+        console.log(resultTaskData);
+        res.json({ status: 200, message: 'Task details', results: resultTaskData.length, data: resultTaskData })
     } catch (error) {
         next(error);
     }
@@ -56,5 +51,5 @@ async function getAllTasksByProject(req, res, next) {
 module.exports = {
     getAllTask,
     getTasksByID,
-    getAllTasksByProject
+    getTaskByStartDates
 }

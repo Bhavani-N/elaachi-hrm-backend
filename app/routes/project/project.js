@@ -6,15 +6,17 @@ const { createProject,
     updateProject,
     deleteProject  } = require('../../controllers/project');
 
+const { AuthServ } = require("../../utils/auth");
+
 router
     .route('/')
-    .post(createProject.createProjects)
-    .get(getProject.getAllProject);
+    .post(AuthServ.authorize(), createProject.createProjects)
+    .get(AuthServ.authorize(), getProject.getAllProject);
 
 router
     .route('/:id')
-    .get(getProject.getProjectsByID)
-    .put(updateProject.updateProjects)
-    .delete(deleteProject.deleteProjects)
+    .get(AuthServ.authorize(), getProject.getProjectsByID)
+    .put(AuthServ.authorize(), updateProject.updateProjects)
+    .delete(AuthServ.authorize(), deleteProject.deleteProjects)
 
 module.exports = router;

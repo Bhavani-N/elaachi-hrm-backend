@@ -12,7 +12,7 @@ const { AuthServ } = require("../../utils/auth");
 
 router
     .route('/')
-    .post(createStaff.createStaff)
+    .post(AuthServ.authorize(), createStaff.createStaff)
     .get(AuthServ.authorize(), getStaff.getStaff)
     .put(AuthServ.authorize(), updateStaff.updateStaffDetails)
 

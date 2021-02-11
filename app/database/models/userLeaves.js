@@ -11,7 +11,7 @@ const userLeaveSchema = new Schema({
         }
     ],
     usedLeave: { type: Number },
-    AvailableLeave: { type: Number },
+    availableLeave: { type: Number },
     Date: { type: Date },
     staffId: [
         {
@@ -19,7 +19,7 @@ const userLeaveSchema = new Schema({
             ref: 'Staff'
         }
     ],
-    Note: { type: String },
+    note: { type: String },
     file: { type: String }
 });
 

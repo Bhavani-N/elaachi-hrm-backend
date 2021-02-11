@@ -26,7 +26,6 @@ async function getAllTasks() {
   return new Promise(async(resolve, reject) => {
         try {
             let data = await Task.find().populate('project').exec();
-            console.log(data);
             resolve(data)
         } catch (error) {
             reject(error)
