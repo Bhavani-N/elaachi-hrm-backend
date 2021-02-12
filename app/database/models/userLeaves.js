@@ -11,7 +11,6 @@ const userLeaveSchema = new Schema({
         }
     ],
     usedLeave: { type: Number },
-    availableLeave: { type: Number },
     Date: { type: Date },
     staffId: [
         {

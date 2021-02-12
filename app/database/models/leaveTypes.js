@@ -10,6 +10,7 @@ const leaveTypeSchema = new Schema({
             ref: 'Company'
         }
     ],
+    availableLeave: { type: Number },
     colorCode: { type: String },
     Date: { type: Date }
 });
