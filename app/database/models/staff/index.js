@@ -26,10 +26,11 @@ const loginActivitySchema = new Schema({
 const staffSchema = new Schema({
   firstName: { type: String },
   lastName: { type: String },
-  phoneNumber: {
-    countryCode: { type: Number },
-    mobile: { type: Number },
-  },
+  // phoneNumber: {
+  //   countryCode: { type: Number },
+  //   mobile: { type: Number },
+  // },
+  phoneNumber: { type: Number },
   username: {
     type: String,
   },
@@ -43,13 +44,13 @@ const staffSchema = new Schema({
   password: { type: String },
   otp: String,
   isEmailVerified: { type: Boolean, default: false },
-  isActive: { type: Boolean, default: true, select: false },
+  // isActive: { type: Boolean, default: true, select: false },
+  status: { type: String, enum: ['ACTIVE', 'INACTIVE'] },
   isDelete: { type: Boolean, default: false },
   loginActivity: [loginActivitySchema],
   passwordReset: [passwordResetSchema],
   role: { type: String, enum: ['admin', 'HR', 'Employee'], default: 'Employee' },
   profileImage: { type: String, default: 'default.jpg' },
-  contact: { type: Number },
   languages: { type: String },
   skills: { type: String },
   socialMedia: [

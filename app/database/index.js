@@ -6,7 +6,7 @@ const Company = require('./models/company');
 const LeaveType = require('./models/leaveTypes');
 const Project = require('./models/project');
 const userLeave = require('./models/userLeaves');
-const Attendance = require('./models/userLeaves');
+const Attendance = require('./models/attendance');
 
 module.exports = {
     Staff,
