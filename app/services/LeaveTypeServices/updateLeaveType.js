@@ -14,7 +14,7 @@ async function updateLeaveType(id, data) {
 async function updateLeaveTypeById(id, data) {
     return new Promise(async(resolve, reject) => {
         try {
-            let result = await LeaveType.findByIdAndUpdate(id, data, { new: true }).exec();
+            let result = await LeaveType.findByIdAndUpdate({_id: id}, data, { new: true }).exec();
             resolve(result)
         } catch (error) {
             reject(error)

@@ -16,7 +16,7 @@ router
 router
     .route('/:id')
     .get(AuthServ.authorize(), getLeaveType.getLeaveTypesByID)
-    .put(AuthServ.authorize(), updateLeaveType.updateLeaveTypes)
+    .put(AuthServ.authorize(), updateLeaveType.updateLeaveTypesById)
     .delete(AuthServ.authorize(), deleteLeaveType.deleteLeaveTypes)
 
 module.exports = router;
