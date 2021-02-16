@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const Company = require('./company');
 
 const leaveTypeSchema = new Schema({
-    type_name: { type: String },
+    name: { type: String },
     status: { type: String, enum: ['ACTIVE', 'INACTIVE'] },
     companyId:  [
         {
