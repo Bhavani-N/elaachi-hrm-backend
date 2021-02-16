@@ -14,7 +14,7 @@ router
     .route('/')
     .post(AuthServ.authorize(), createStaff.createStaff)
     .get(AuthServ.authorize(), getStaff.getStaff)
-    .put(AuthServ.authorize(), updateStaff.updateStaffDetails)
+    // .put(AuthServ.authorize(), updateStaff.updateStaffDetails)
 
 router
     .route('/:id')
