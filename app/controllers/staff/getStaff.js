@@ -19,7 +19,7 @@ async function getStaffById(req, res, next) {
     try {
         let id = req.params.id;
         const company = req.tokenData.companyId;
-        const result = await staffService.getStaff({isDeactived: false, "_id": id },{companyId:company});
+        const result = await staffService.getStaffById({isDeactived: false, "_id": id },{companyId:company});
         res.json({ status: 200, message: 'get staff details by Id successfully', result: result, company })
     } catch (error) {
         next(error)

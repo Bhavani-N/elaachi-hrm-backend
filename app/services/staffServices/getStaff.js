@@ -11,6 +11,17 @@ async function getStaff() {
   })
 }
 
+async function getStaffById(id) {
+  return new Promise(async(resolve, reject)=> {
+      try {
+          let data = await Staff.Staff.findById(id).exec();
+          resolve(data)
+      } catch (error) {
+          reject(error)
+      }
+  })
+}
+
 async function getStaffWithPassword(query) {
   return new Promise(async(resolve, reject) => {
     try {
@@ -24,5 +35,6 @@ async function getStaffWithPassword(query) {
 
 module.exports = {
   getStaff,
+  getStaffById,
   getStaffWithPassword
 }
