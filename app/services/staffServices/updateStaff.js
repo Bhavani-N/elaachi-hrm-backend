@@ -19,7 +19,7 @@ async function updateStaffById(id, data) {
         } catch (error) {
             reject(error)
         }
-    }) 
+    })
 }
 
 module.exports = {
