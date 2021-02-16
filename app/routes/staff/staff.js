@@ -19,7 +19,7 @@ router
 router
     .route('/:id')
     .get(AuthServ.authorize(), getStaff.getStaffById)
-    .put(AuthServ.authorize(), updateStaff.updateStaff)
+    .put(AuthServ.authorize(), updateStaff.updateStaffsById)
     .delete(AuthServ.authorize(), deleteStaff.deleteStaff)
 
 module.exports = router;

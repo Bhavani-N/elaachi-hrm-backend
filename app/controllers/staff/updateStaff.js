@@ -34,14 +34,21 @@ async function updateStaff(req, res, next) {
     }
 }
 
+async function updateStaffsById(req, res, next) {
+    try {
+        const result = await staffService.updateStaffById(req.params.id, req.body);
+        res.json({ status: 200, message: 'Staff updated successfully', result: result })
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function updateStaffDetails(req, res, next) {
     let data = req.body;
-    let id = req.query.id;
-    console.log(id);
-    let company = req.tokenData.companyId;
-    console.log(company);
+    let id = req.params.id;
+    // let company = req.tokenData.companyId;
     try {
-        const result = await staffService.updateStaff({ _id:id, companyId: company }, data);
+        const result = await staffService.updateStaff({ _id:id }, data);
         console.log(result)
         res.json({ status: 200, message: 'staff updated successfully', result: result })
     } catch (error){
@@ -51,5 +58,6 @@ async function updateStaffDetails(req, res, next) {
 
 module.exports = {
     updateStaff,
+    updateStaffsById,
     updateStaffDetails
 }

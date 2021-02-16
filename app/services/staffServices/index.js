@@ -1,7 +1,7 @@
 const {createStaffService }= require('./createStaff');
 const {deleteStaff} = require('./deleteStaff');
 const {getStaff,getStaffById, getStaffWithPassword} = require('./getStaff');
-const { updateStaff} = require('./updateStaff');
+const { updateStaff, updateStaffById} = require('./updateStaff');
 
 module.exports = {
     createStaffService,
@@ -9,5 +9,6 @@ module.exports = {
     getStaff,
     getStaffById,
     getStaffWithPassword,
-    updateStaff
+    updateStaff,
+    updateStaffById
 }
