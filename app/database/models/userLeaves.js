@@ -10,16 +10,25 @@ const userLeaveSchema = new Schema({
             ref: 'LeaveType'
         }
     ],
-    usedLeave: { type: Number },
-    Date: { type: Date },
     staffId: [
         {
             type: mongoose.Schema.ObjectId,
             ref: 'Staff'
         }
     ],
-    note: { type: String },
-    file: { type: String }
+    status: { type: Number },
+    leaveReason: { type: String },
+    dateFrom: { type: Date },
+    dateTo: { type: Date },
+    approved: { type: Number },
+    deniedReason: { type: String },
+    createdAt: { type: Date },
+    reviewedBy: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Staff'
+        }
+    ],
 });
 
 const UserLeave = mongoose.model('UserLeave', userLeaveSchema);
