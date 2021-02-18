@@ -22,10 +22,16 @@ async function getUserLeaveByQuery(query) {
     })
 }
 
-async function getAllUserLeaves() {
+async function getAllUserLeaves(page = 1) {
+    const pageSize = 10;
+    const skip = (page - 1) * pageSize; 
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await userLeave.find().populate('leaveTypeId').exec();
+            let data = await userLeave.find({})
+                .sort({ _id: -1 }) 
+                .skip(skip)
+                .limit(pageSize) // 'page size'
+                .exec();
             resolve(data)
         } catch (error) {
             reject(error)
