@@ -20,7 +20,7 @@ const userLeaveSchema = new Schema({
             ref: 'Staff'
         }
     ],
-    status: { type: String, enum: ['APPROVED', 'DENIED'] },
+    status: { type: String, enum: ['PENDING','APPROVED', 'DENIED'], default: 'PENDING' },
     leaveReason: { type: String },
     dateFrom: { type: Date },
     dateTo: { type: Date },
