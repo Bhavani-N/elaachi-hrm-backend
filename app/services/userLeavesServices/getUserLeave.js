@@ -31,6 +31,7 @@ async function getAllUserLeaves(page = 1) {
                 .sort({ dateFrom: -1 }) 
                 .skip(skip)
                 .limit(pageSize) // 'page size'
+                .populate('staffId')
                 .populate('leaveTypeId')
                 .exec();
             resolve(data)
