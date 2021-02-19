@@ -3,6 +3,10 @@ const { Schema } = mongoose;
 const LeaveType = require('./leaveTypes');
 const Staff = require('./staff');
 
+const options = {
+    timestamps: true
+};
+
 const userLeaveSchema = new Schema({
     leaveTypeId: [
         {
@@ -22,14 +26,14 @@ const userLeaveSchema = new Schema({
     dateTo: { type: Date },
     approved: { type: Number },
     deniedReason: { type: String },
-    createdAt: { type: Date },
+    // createdAt: { type: Date },
     reviewedBy: [
         {
             type: mongoose.Schema.ObjectId,
             ref: 'Staff'
         }
     ],
-});
+}, options);
 
 const UserLeave = mongoose.model('UserLeave', userLeaveSchema);
 module.exports = UserLeave;

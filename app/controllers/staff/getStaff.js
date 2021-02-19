@@ -2,9 +2,8 @@ const { staffService } = require('../../services')
 
 async function getStaff(req, res, next) {
     try {
-        // const company = req.tokenData.companyId;
-        // const result = await staffService.getStaff({isDeactived: false},{companyId: req.tokenData.companyId});
-        const result = await staffService.getStaff({isDeactived: false});
+        const page = parseInt(req.query.page)
+        const result = await staffService.getStaff(page);
         if(result) {
             res.json({ status: 200, message: 'get staff details successfully', result: result })
         } else {

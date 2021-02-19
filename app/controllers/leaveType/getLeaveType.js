@@ -2,13 +2,8 @@ const { getLeaveTypeById, getLeaveTypeByQuery, getAllLeaveTypes } = require('../
 
 async function getAllLeaveType(req, res, next) {
     try {
-        // let leaveTypeObj = req.body;
-        // let filters = {};
-        // filters.query = {};
-        // filters.pageNum = {};
-        // filters.pageSize = {};
-
-        const result = await getAllLeaveTypes();
+        const page = parseInt(req.query.page)
+        const result = await getAllLeaveTypes(page);
         res.json({ status: 200, message: 'Leave Type details', result: result })
     } catch (error) {
         next(error);

@@ -5,7 +5,8 @@ const { Task } = require('../../database');
 async function getAllTask(req, res, next) {
     try {
         let taskObj = req.body;
-        const result = await taskService.getAllTasks();
+        const page = parseInt(req.query.page)
+        const result = await taskService.getAllTasks(page);
         res.json({ status: 200, message: 'Task details', results: result.length, data: result })
     } catch (error) {
         next(error);

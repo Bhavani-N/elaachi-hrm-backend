@@ -22,10 +22,15 @@ async function getLeaveTypeByQuery(query) {
     })
 }
 
-async function getAllLeaveTypes() {
+async function getAllLeaveTypes(page = 1) {
+    const pageSize = 10;
+    const skip = (page - 1) * pageSize; 
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await LeaveType.find();
+            let data = await LeaveType.find({})
+            .sort({ _id: -1 }) 
+            .skip(skip)
+            .limit(pageSize) // 'page size'
             resolve(data)
         } catch (error) {
             reject(error)

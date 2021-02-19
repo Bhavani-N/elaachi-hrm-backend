@@ -41,7 +41,7 @@ const staffSchema = new Schema({
     unique: true,
     trim: true,
   },
-  password: { type: String },
+  password: { type: String }, 
   otp: String,
   isEmailVerified: { type: Boolean, default: false },
   // isActive: { type: Boolean, default: true, select: false },

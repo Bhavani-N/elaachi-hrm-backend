@@ -1,10 +1,17 @@
 const Staff = require('../../database');
 
-async function getStaff() {
+async function getStaff(page = 1) {
+  const pageSize = 10;
+  const skip = (page - 1) * pageSize; 
   return new Promise(async(resolve, reject) => {
       try {
-          let result = await  Staff.Staff.find().populate('companyId').exec();
-          resolve(result)
+        let result = await  Staff.Staff.find({})
+          .sort({ _id: -1 }) 
+          .skip(skip)
+          .limit(pageSize) // 'page size'
+          .populate('companyId')
+          .exec();
+        resolve(result)
       } catch (error) {
           reject(error)
       }

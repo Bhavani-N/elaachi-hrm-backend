@@ -3,12 +3,8 @@ const { projectService } = require('../../services')
 async function getAllProject(req, res, next) {
     try {
         let projectObj = req.body;
-        // let filters = {};
-        // filters.query = {};
-        // filters.pageNum = {};
-        // filters.pageSize = {};
-
-        const result = await projectService.getAllProjects();
+        const page = parseInt(req.query.page)
+        const result = await projectService.getAllProjects(page);
         res.json({ status: 200, message: 'Project details', result: result })
     } catch (error) {
         next(error);
