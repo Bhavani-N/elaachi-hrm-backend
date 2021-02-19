@@ -28,7 +28,7 @@ async function getAllUserLeaves(page = 1) {
     return new Promise(async(resolve, reject) => {
         try {
             let data = await userLeave.find({})
-                .sort({ _id: -1 }) 
+                .sort({ dateFrom: -1 }) 
                 .skip(skip)
                 .limit(pageSize) // 'page size'
                 .exec();
