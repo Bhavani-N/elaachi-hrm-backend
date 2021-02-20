@@ -3,7 +3,7 @@ const { userLeave } = require('../../database');
 async function getUserLeaveById(id) {
     return new Promise(async(resolve, reject)=> {
         try {
-            let data = await userLeave.findById(id).populate('leaveTypeId').exec();
+            let data = await userLeave.findById(id).populate('leaveTypeId', 'staffId').exec();
             resolve(data)
         } catch (error) {
             reject(error)
