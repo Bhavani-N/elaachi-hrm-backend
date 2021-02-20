@@ -26,11 +26,10 @@ const taskSchema = new Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Project'
     },
-    // duration: [{
-    //     dates: { type: Date },
-    //     TimeTaken: { type: Number }
-    // }],
-    duration: { type: Number },
+    duration: [{
+        dates: { type: Date },
+        timeTaken: { type: Number }
+    }],
     billableHours: {
         type: Number
     }
