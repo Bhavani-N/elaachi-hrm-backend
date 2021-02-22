@@ -13,6 +13,8 @@ router
     .post(AuthServ.authorize(), createLeaveType.createLeaveTypes)
     .get(AuthServ.authorize(), getLeaveType.getAllLeaveType);
 
+router.route('/list').get(AuthServ.authorize(), getLeaveType.getAllLeaveTypesByQuery);
+
 router
     .route('/:id')
     .get(AuthServ.authorize(), getLeaveType.getLeaveTypesByID)

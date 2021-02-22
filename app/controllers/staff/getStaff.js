@@ -14,6 +14,17 @@ async function getStaff(req, res, next) {
     }
 }
 
+async function getAllStaffByQuery(req, res, next) {
+    try {
+        let filter = {};
+        if (req.query.firstName) filter = { firstName: req.query.firstName } ;
+        const result = await taskService.getAllStaffByQuery(filter);
+        res.json({ status: 200, message: 'Task details', results: result.length, data: result })
+    } catch (error) {
+        next(error);
+    } 
+}
+
 async function getStaffById(req, res, next) {
     try {
         let id = req.params.id;
@@ -27,5 +38,6 @@ async function getStaffById(req, res, next) {
 
 module.exports = {
     getStaff,
-    getStaffById
+    getStaffById,
+    getAllStaffByQuery
 }
