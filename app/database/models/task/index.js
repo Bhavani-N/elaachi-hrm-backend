@@ -26,6 +26,7 @@ const taskSchema = new Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'Project'
     },
+    numberOfDays: { type: Number },
     duration: [{
         dates: { type: Date },
         timeTaken: { type: Number }
