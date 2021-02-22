@@ -14,6 +14,7 @@ router
     .get(AuthServ.authorize(), getTask.getAllTask);
 
 router.route('/list/:year').get(AuthServ.authorize(), getTask.getTaskByStartDates);
+router.route('/list').get(AuthServ.authorize(), getTask.getAllTaskByQuery);
 
 router
     .route('/:id')

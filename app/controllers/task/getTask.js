@@ -13,6 +13,17 @@ async function getAllTask(req, res, next) {
     } 
 }
 
+async function getAllTaskByQuery(req, res, next) {
+    try {
+        let filter = {};
+        if (req.query.taskName) filter = { taskName: req.query.taskName } ;
+        const result = await taskService.getTaskByQuery(filter);
+        res.json({ status: 200, message: 'Task details', results: result.length, data: result })
+    } catch (error) {
+        next(error);
+    } 
+}
+
 async function getTasksByID(req, res, next) {
     try {
         let taskId = req.params.id;
@@ -50,5 +61,6 @@ async function getTaskByStartDates(req, res, next) {
 module.exports = {
     getAllTask,
     getTasksByID,
-    getTaskByStartDates
+    getTaskByStartDates,
+    getAllTaskByQuery
 }
