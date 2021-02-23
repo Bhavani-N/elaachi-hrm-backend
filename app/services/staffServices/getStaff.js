@@ -32,13 +32,14 @@ async function getStaffById(id) {
 async function getStaffWithPassword(query) {
   return new Promise(async(resolve, reject) => {
     try {
-      let result = await Staff.Staff.find(query).populate('companyId').exec();
+      let result = await Staff.Staff.find(query).exec();
       resolve(result)
     } catch (error) {
       reject(error)
     }
   })
 }
+
 
 module.exports = {
   getStaff,

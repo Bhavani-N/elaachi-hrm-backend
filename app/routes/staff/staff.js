@@ -16,7 +16,7 @@ router
     .get(AuthServ.authorize(), getStaff.getStaff)
     // .put(AuthServ.authorize(), updateStaff.updateStaffDetails)
 
-router.route('/list').get(AuthServ.authorize(), getStaff.getAllStaffByQuery);
+router.route('/list').get(AuthServ.authorize(), getStaff.getAllStaffsByQuery);
 
 router
     .route('/:id')

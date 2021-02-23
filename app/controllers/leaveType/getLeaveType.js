@@ -14,8 +14,8 @@ async function getAllLeaveTypesByQuery(req, res, next) {
     try {
         let filter = {};
         if (req.query.name) filter = { name: req.query.name } ;
-        const result = await taskService.getAllLeaveTypeByQuery (filter);
-        res.json({ status: 200, message: 'Task details', results: result.length, data: result })
+        const result = await getLeaveTypeByQuery(filter);
+        res.json({ status: 200, message: 'Leave Type details By Name', results: result.length, data: result })
     } catch (error) {
         next(error);
     } 
