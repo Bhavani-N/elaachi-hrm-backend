@@ -27,6 +27,7 @@ const userLeaveSchema = new Schema({
     approved: { type: Number },
     deniedReason: { type: String },
     // createdAt: { type: Date },
+    fileChosen: { type: String },
     reviewedBy: [
         {
             type: mongoose.Schema.ObjectId,
