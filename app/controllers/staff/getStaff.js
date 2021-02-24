@@ -36,8 +36,20 @@ async function getStaffById(req, res, next) {
     }
 }
 
+async function getStaffsBySearch(req, res, next) {
+    try {
+        let filter = {};
+        if (req.query.firstName) filter = { firstName: req.query.firstName } ;
+        const result = await staffService.getStaffBySearch(filter);
+        res.json({ status: 200, message: 'get staff details by Id successfully', data: result.length, results: result })
+    } catch (error) {
+        next(error)
+    }
+}
+
 module.exports = {
     getStaff,
     getStaffById,
-    getAllStaffsByQuery
+    getAllStaffsByQuery,
+    getStaffsBySearch
 }

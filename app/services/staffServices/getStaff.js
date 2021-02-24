@@ -40,9 +40,30 @@ async function getStaffWithPassword(query) {
   })
 }
 
+async function getStaffBySearch(query) {
+  return new Promise(async(resolve, reject) => {
+    try {
+      let result = await Staff.Staff.find({
+        firstName: {
+          $regex: new RegExp(query)
+        }
+      }, {
+        _id: 0,
+        _v: 0
+      })
+      .limit(10)
+      .exec();
+      resolve(result)
+    } catch (error) {
+      reject(error)
+    }
+  })
+}
+
 
 module.exports = {
   getStaff,
   getStaffById,
-  getStaffWithPassword
+  getStaffWithPassword,
+  getStaffBySearch
 }
