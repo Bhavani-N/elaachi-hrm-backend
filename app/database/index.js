@@ -7,6 +7,7 @@ const LeaveType = require('./models/leaveTypes');
 const Project = require('./models/project');
 const userLeave = require('./models/userLeaves');
 const Attendance = require('./models/attendance');
+const PaySlip = require('./models/payslip');
 
 module.exports = {
     Staff,
@@ -15,5 +16,6 @@ module.exports = {
     LeaveType,
     Project,
     userLeave,
-    Attendance
+    Attendance,
+    PaySlip
 }
