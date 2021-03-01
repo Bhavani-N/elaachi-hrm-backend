@@ -13,5 +13,5 @@ async function deletePaySlips(req, res, next) {
 }
 
 module.exports = {
-    deleteUserLeaves
+    deletePaySlips
 }

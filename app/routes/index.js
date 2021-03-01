@@ -5,7 +5,8 @@ const authRoutes = require('./auth');
 const companyRoutes = require('./company/companyRoute');
 const leaveTypeRoutes = require('./leaveType/leaveType');
 const userLeaveRoutes = require('./userLeave/userLeave');
-const attendanceRoutes = require('./attendance/attendance')
+const attendanceRoutes = require('./attendance/attendance');
+const payslipRoutes = require('./payslip/payslip');
 
 module.exports = app => {
     app.use('/api/v1/auth', authRoutes);
@@ -16,4 +17,5 @@ module.exports = app => {
     app.use('/api/v1/leaveType', leaveTypeRoutes);
     app.use('/api/v1/userLeave', userLeaveRoutes);
     app.use('/api/v1/attendance', attendanceRoutes);
+    app.use('/api/v1/payslip', payslipRoutes);
 }
