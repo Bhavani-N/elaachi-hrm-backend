@@ -25,7 +25,7 @@ async function getPaySlipByQuery(query) {
 async function getAllPaySlips() {
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await PaySlip.find();
+            let data = await PaySlip.find().populate('staffId');
             resolve(data)
         } catch (error) {
             reject(error)
