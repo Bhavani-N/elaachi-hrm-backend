@@ -57,7 +57,28 @@ async function getUserLeavesByID(req, res, next) {
     }
 }
 
+async function getLeaveByStartDates(req, res, next) {
+    try {
+        const date1 = req.params.date1;
+        const date2 = req.params.date2;
+        const result = await getAllUserLeaves();
+        let startDate = new Date(`${date1}`);
+        let endDate = new Date(`${date2}`);
+        console.log(startDate, endDate)
+        let resultLeaveData = Object.values(result).filter(a => {
+            console.log(a.startDate);
+            var date = new Date(a.dateFrom);
+            return (date >= startDate && date <= endDate);
+        });
+        console.log(resultLeaveData)
+        res.json({ status: 200, message: 'Leave details By StartDates', results: resultLeaveData.length, data: resultLeaveData })
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = {
     getAllUserLeave,
-    getUserLeavesByID
+    getUserLeavesByID,
+    getLeaveByStartDates
 }

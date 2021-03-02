@@ -4,6 +4,7 @@ const projectService = require('./projectServices');
 const companyService = require('./companyServices');
 const leaveTypeService = require('./LeaveTypeServices');
 const userLeaveService = require('./userLeavesServices');
+const paySlipService = require('./payslipServices');
 
 module.exports = {
     staffService,
@@ -11,5 +12,6 @@ module.exports = {
     projectService,
     companyService,
     leaveTypeService,
-    userLeaveService
+    userLeaveService,
+    paySlipService
 }

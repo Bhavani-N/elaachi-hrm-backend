@@ -13,6 +13,8 @@ router
     .post(AuthServ.authorize(), createUserLeave.createUserLeaves)
     .get(AuthServ.authorize(), getUserLeave.getAllUserLeave);
 
+router.route('/:date1/:date2').get(AuthServ.authorize(), getUserLeave.getLeaveByStartDates);
+
 router
     .route('/:id')
     .get(AuthServ.authorize(), getUserLeave.getUserLeavesByID)
