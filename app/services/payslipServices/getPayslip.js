@@ -3,7 +3,7 @@ const { PaySlip } = require('../../database');
 async function getPaySlipById(id) {
     return new Promise(async(resolve, reject)=> {
         try {
-            let data = await PaySlip.findById(id).exec();
+            let data = await PaySlip.findById(id).populate('staffId').exec();
             resolve(data)
         } catch (error) {
             reject(error)
@@ -14,7 +14,7 @@ async function getPaySlipById(id) {
 async function getPaySlipByQuery(query) {
     return new Promise(async(resolve, reject) => {
         try {
-            let data = await PaySlip.findOne(query).exec();
+            let data = await PaySlip.findOne(query).populate('staffId').exec();
             resolve(data)
         } catch (error) {
             reject(error)
