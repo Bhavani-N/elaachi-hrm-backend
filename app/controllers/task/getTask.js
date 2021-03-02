@@ -36,22 +36,17 @@ async function getTasksByID(req, res, next) {
 
 async function getTaskByStartDates(req, res, next) {
     try {
-        let taskObj = req.body;
-        const year = req.params.year * 1;
+        const date1 = req.params.date1;
+        const date2 = req.params.date2;
         const result = await taskService.getAllTasks();
-        let startDate = new Date(`${year}-02-01`);
-        let endDate = new Date(`${year}-02-10`);
+        let startDate = new Date(`${date1}`);
+        let endDate = new Date(`${date2}`);
         let resultTaskData = Object.values(result).filter(a => {
-            // let hitDates = a.startDates || {}; // extract all dates
-            // // hitDates = Object.keys(hitDates);
-            // hitDateMatchExists = hitDates.some(function (dateStr) {
-            //     let date = new Date(dateStr);
-            //     return date >= startDate && date <= endDate
-            // }); 
-            // return hitDateMatchExists;
-            var date = new Date(a.startDates);
+            var date = new Date(a.startDate);
+            console.log(date);
             return (date >= startDate && date <= endDate);
         });
+        console.log(resultTaskData)
         res.json({ status: 200, message: 'Task details', results: resultTaskData.length, data: resultTaskData })
     } catch (error) {
         next(error);

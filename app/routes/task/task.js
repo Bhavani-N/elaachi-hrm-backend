@@ -13,7 +13,7 @@ router
     .post(AuthServ.authorize(), createTask.createTasks)
     .get(AuthServ.authorize(), getTask.getAllTask);
 
-router.route('/list/:year').get(AuthServ.authorize(), getTask.getTaskByStartDates);
+router.route('/:date1/:date2').get(AuthServ.authorize(), getTask.getTaskByStartDates);
 router.route('/list').get(AuthServ.authorize(), getTask.getAllTaskByQuery);
 
 router
