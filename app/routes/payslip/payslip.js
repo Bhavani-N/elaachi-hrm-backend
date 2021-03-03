@@ -13,6 +13,7 @@ router
     .post(AuthServ.authorize(), createPayslip.createPaySlips)
     .get(AuthServ.authorize(), getPayslip.getAllPayslip);
 
+router.route('/list').get(AuthServ.authorize(), getPayslip.getPayslipsByQuery);
 
 router
     .route('/:id')

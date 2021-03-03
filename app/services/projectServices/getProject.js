@@ -22,7 +22,7 @@ async function getProjectByQuery(query) {
   })
 }
 
-async function getAllProjects(page = 1) {
+async function getAllProjects(page = 1) { 
     const pageSize = 10;
     const skip = (page - 1) * pageSize;
     return new Promise(async(resolve, reject) => {
