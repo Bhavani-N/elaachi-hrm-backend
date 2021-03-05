@@ -29,6 +29,7 @@ router
     .get(AuthServ.authorize(), getPayslip.getAllPayslip);
 
 router.route('/file').post(upload.single('file'), uploadSingleFile)
+router.route('/list').get(AuthServ.authorize(), getPayslip.getPayslipsByQuery);
 
 router
     .route('/:id')

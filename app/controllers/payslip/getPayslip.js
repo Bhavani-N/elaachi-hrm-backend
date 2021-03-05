@@ -1,6 +1,5 @@
-const { getPaySlipById,
-    getPaySlipByQuery,
-    getAllPaySlips } = require('../../services/payslipServices/getPayslip')
+const { getPaySlipById, getPaySlipByQuery, getAllPaySlips } = require('../../services/payslipServices/getPayslip')
+const { getStaffById } = require('../../services/staffServices/getStaff')
 
 async function getAllPayslip(req, res, next) {
     try {
@@ -21,7 +20,19 @@ async function getPayslipsByID(req, res, next) {
     }
 }
 
+async function getPayslipsByQuery(req, res, next) {
+    try {
+        let filter = {};
+        if (req.query.staffId) filter = { staffId: req.query.staffId } ;
+        const result = await  getPaySlipByQuery(filter);
+        res.json({ status: 200, message: 'PaySlips By Staff', results: result.length, data: result })
+    } catch (error) {
+        next(error);
+    } 
+}
+
 module.exports = {
     getAllPayslip,
-    getPayslipsByID
+    getPayslipsByID,
+    getPayslipsByQuery
 }
