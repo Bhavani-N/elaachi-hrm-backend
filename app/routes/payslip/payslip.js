@@ -28,7 +28,17 @@ router
     .post(AuthServ.authorize(), createPayslip.createPaySlips)
     .get(AuthServ.authorize(), getPayslip.getAllPayslip);
 
-router.route('/file').post(upload.single('file'), uploadSingleFile)
+router.route('/file').post(upload.single('file'), (req, res, next) => {
+    const file = req.file
+    console.log(file.filename);
+    if(!file){
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+    res.send(file)
+})
+
 router.route('/list').get(AuthServ.authorize(), getPayslip.getPayslipsByQuery);
 
 router

@@ -45,6 +45,30 @@ require('./app/routes')(app);
 
 app.use(globalErrorHandler);
 
+const multer = require('multer');
+
+const storage = multer.diskStorage({
+    destination: (req, file, callBack) => {
+        callBack(null, 'uploads')
+    },
+    filename: (req, file, callBack) => {
+        callBack(null, `HRM_${file.originalname}`)
+    }
+}) 
+
+var upload = multer({ storage: storage })
+
+app.post('/file', upload.single('file'), (req, res, next) => {
+    const file = req.file
+    console.log(file.filename);
+    if(!file){
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+    res.send(file)
+})
+
 // let upload = multer({ dest: 'uploads/' })
 
 const onServerStart = () => {
