@@ -4,9 +4,13 @@ const multer = require('multer');
 const router = express.Router();
 const UploadController = require('../../controllers/upload');
 
-const upload = multer({ dest: 'uploads/' });
+const upload = require('../../../config/multer.config');
 
-router.post('/addPdfFile', upload.single('file'), UploadController.addPdfFile);
+router.post('/upload', upload.single('file'), UploadController.doUpload);
+
+router.get('/all', UploadController.listKeyNames);
+
+router.get('/:filename', UploadController.doDownload);
 
 module.exports = router;
 
