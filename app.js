@@ -5,7 +5,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
-// const sgMail = require('@sendgrid/mail')
 
 const app = express();
 const server = require('http').createServer(app);
@@ -14,7 +13,6 @@ const config = require('./config/index');
 const AppError = require('./app/utils/appError');
 const globalErrorHandler = require('./app/controllers/errorController');
 
-// const { connectionDb } = require('./app/database/db');
 
 const DB = process.env.MONGO_DB_URI.replace(
     '<PASSWORD>', 
@@ -69,7 +67,6 @@ app.post('/file', upload.single('file'), (req, res, next) => {
     res.send(file)
 })
 
-// let upload = multer({ dest: 'uploads/' })
 
 const onServerStart = () => {
     const ENVIRONMENT = process.env.NODE_ENV || 'development';
