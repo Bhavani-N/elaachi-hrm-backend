@@ -13,8 +13,11 @@ const payslipSchema = new Schema({
             ref: 'Staff'
         }
     ],
-    dateIssued: { type: Date },
-    fileChosen: { type: String },
+    month: { type: String },
+    year: { type: Number },
+    file: [{
+        file: { type: String }
+    }]
 }, options);
 
 const PaySlip = mongoose.model('PaySlip', payslipSchema);
