@@ -7,12 +7,10 @@ const options = {
 };
 
 const payslipSchema = new Schema({
-    staffId: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Staff'
-        }
-    ],
+    staffId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Staff'
+    },
     month: { type: String },
     year: { type: Number },
     file: [{
