@@ -14,12 +14,10 @@ const userLeaveSchema = new Schema({
             ref: 'LeaveType'
         }
     ],
-    staffId: [
-        {
-            type: mongoose.Schema.ObjectId,
-            ref: 'Staff'
-        }
-    ],
+    staffId: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Staff'
+    },
     status: { type: String, enum: ['PENDING','APPROVED', 'DENIED'], default: 'PENDING' },
     leaveReason: { type: String },
     dateFrom: { type: Date },
@@ -27,7 +25,9 @@ const userLeaveSchema = new Schema({
     approved: { type: Number },
     deniedReason: { type: String },
     // createdAt: { type: Date },
-    fileChosen: { type: String },
+    file: [{
+        file: { type: String }
+    }],
     reviewedBy: [
         {
             type: mongoose.Schema.ObjectId,
